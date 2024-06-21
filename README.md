@@ -1,4 +1,4 @@
-# Origin Shift Algorithm for maze generation
+# "Origin Shift"-Algorithm for maze generation
 
 This is a C++ implementation of the "Origin Shift" algorithm to generate a maze.
 I stumbled over this algorithm on the YouTube channel of [CaptainLuma](https://www.youtube.com/@captainluma7991), specifically their video titled ["New Maze Generating Algorithm"](https://www.youtube.com/watch?v=zbXKcDVV4G0).
