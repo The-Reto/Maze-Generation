@@ -3,12 +3,12 @@
 #include <ctime>
 
 class MazeGenerator {
-    const short x_size,y_size;
-    short x,y;
+    const int x_size,y_size;
+    int x,y;
     char* board;
 
     public:
-    MazeGenerator(short _x_size=16, short _y_size=16) : x_size(_x_size), y_size(_y_size) {
+    MazeGenerator(int _x_size=16, int _y_size=16) : x_size(_x_size), y_size(_y_size) {
         board = new char[x_size*y_size];
         initializeMaze();
     }
@@ -33,35 +33,38 @@ class MazeGenerator {
 
     bool makeGenerationStep() {
         int r = std::rand() % 4;
-        if (r == 0 & x < x_size-1) {
+        if (r == 0 && x < x_size-1) {
             // Move Right
             board[x+x_size*y] = 'R';
             x++;
+            return true;
         }
-        else if (r == 1 & x > 0) {
+        else if (r == 1 && x > 0) {
             // Move Left
             board[x+x_size*y] = 'L';
             x--;
+            return true;
         }
-        else if (r == 2 & y > 0) {
+        else if (r == 2 && y > 0) {
             // Move Up
             board[x+x_size*y] = 'U';
             y--;
+            return true;
         }
-        else if (r == 3 & y < y_size-1) {
+        else if (r == 3 && y < y_size-1) {
             // Move Down
             board[x+x_size*y] = 'D';
             y++;
+            return true;
         }
         else {
             return false;
         }
-        return true;
     }
 
     void visualizeMaze(){
         static const std::string out[16] = {"e","═","═","═","║","╔","╗","╦", "║","╚","╝","╩","║","╠","╣","╬"};
-        for (int i =  0; i < y_size; i++) {
+        for (int i = 0; i < y_size; i++) {
             for (int j =  0; j < x_size; j++) {
                 short c = 0; // up,dwn,l,r
 
@@ -72,10 +75,10 @@ class MazeGenerator {
                 else if ( board[j+x_size*i] == 'U' ) { c |= 8; }
 
                 // Incomming
-                if (i < y_size-1 & board[j+x_size*(i+1)] == 'U' ) {c |= 4;}                    
-                if (i > 0        & board[j+x_size*(i-1)] == 'D' ) {c |= 8;}
-                if (j < x_size-1 & board[j+1+x_size*i]   == 'L' ) {c |= 1;}
-                if (j > 0        & board[j-1+x_size*i]   == 'R' ) {c |= 2;}
+                if (i < y_size-1 && board[j+x_size*(i+1)] == 'U' ) {c |= 4;}                    
+                if (i > 0        && board[j+x_size*(i-1)] == 'D' ) {c |= 8;}
+                if (j < x_size-1 && board[j+1+x_size*i]   == 'L' ) {c |= 1;}
+                if (j > 0        && board[j-1+x_size*i]   == 'R' ) {c |= 2;}
 
                 std::cout << out[c];
             }
@@ -93,6 +96,7 @@ int main(int argc, char *argv[]){
     MazeGenerator gen(x, y);
     std::cout << "Generating...\n";
     gen.mazeGeneration(steps);
+    std::cout << "Done!\n";
     gen.visualizeMaze();
 
 }
