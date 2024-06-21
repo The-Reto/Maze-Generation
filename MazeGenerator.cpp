@@ -88,7 +88,7 @@ class MazeGenerator {
 
 int main(int argc, char *argv[]){
     std::srand(std::time(nullptr));
-    int x = 64, y = 32, steps = 4*x*y*pow(log(x*y/M_PI) / 2,2);
+    int x = 64, y = 32, steps = 4*x*y*pow(log(sqrt(x*y)),2)/M_PI;
 
     MazeGenerator gen(x, y);
     std::cout << "Generating...\n";
