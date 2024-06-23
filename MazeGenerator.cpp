@@ -62,7 +62,21 @@ class MazeGenerator {
         }
     }
 
-    void visualizeMaze(){
+    void visualizeDirectedTree(){
+        for (int i = 0; i < y_size; i++) {
+            for (int j =  0; j < x_size; j++) {
+
+                // Outgoing
+                if      ( board[j+x_size*i] == 'R' ) { std::cout << "⮞"; }
+                else if ( board[j+x_size*i] == 'L' ) { std::cout << "⮜"; }
+                else if ( board[j+x_size*i] == 'D' ) { std::cout << "⮟"; }
+                else if ( board[j+x_size*i] == 'U' ) { std::cout << "⮝"; }
+            }
+            std::cout << "\n";
+        }
+    }
+
+        void visualizeMaze(){
         static const std::string out[16] = {"e","═","═","═","║","╔","╗","╦", "║","╚","╝","╩","║","╠","╣","╬"};
         for (int i = 0; i < y_size; i++) {
             for (int j =  0; j < x_size; j++) {
@@ -98,5 +112,6 @@ int main(int argc, char *argv[]){
     gen.mazeGeneration(steps);
     std::cout << "Done!\n";
     gen.visualizeMaze();
+    gen.visualizeDirectedTree();
 
 }
