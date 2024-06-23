@@ -98,7 +98,7 @@ class MazeGenerator {
     }
 
         void visualizeMaze(){
-        static const std::string pipes_out[16] = {"e","═","═","═","║","╔","╗","╦", "║","╚","╝","╩","║","╠","╣","╬"};
+        static const std::string pipes_out[16] = {"e","╞","╡","═","╥","╔","╗","╦", "╨","╚","╝","╩","║","╠","╣","╬"};
         for (int i = 0; i < y_size; i++) {
             for (int j =  0; j < x_size; j++) {
                 short c = board[j+x_size*i]; // up,dwn,l,r
