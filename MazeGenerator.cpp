@@ -4,11 +4,11 @@
 
 class MazeGenerator {
     enum state {
-        O,
-        R,
-        L,
-        D = 4,
-        U = 8
+        Origin,
+        Right,
+        Left,
+        Down = 4,
+        Up = 8
     };
 
     const int x_size,y_size;
@@ -26,9 +26,9 @@ class MazeGenerator {
         y = y_size-1;
         for (int iy = 0; iy < y_size; iy++) {
             for (int ix = 0; ix < x_size-1; ix++) {
-                board[ix+x_size*iy] = R;
+                board[ix+x_size*iy] = Right;
             }
-            board[x_size-1+x_size*iy] = D;
+            board[x_size-1+x_size*iy] = Down;
         }
     }
 
@@ -43,25 +43,25 @@ class MazeGenerator {
         int r = std::rand() % 4;
         if (r == 0 && x < x_size-1) {
             // Move Right
-            board[x+x_size*y] = R;
+            board[x+x_size*y] = Right;
             x++;
             return true;
         }
         else if (r == 1 && x > 0) {
             // Move Left
-            board[x+x_size*y] = L;
+            board[x+x_size*y] = Left;
             x--;
             return true;
         }
         else if (r == 2 && y > 0) {
             // Move Up
-            board[x+x_size*y] = U;
+            board[x+x_size*y] = Up;
             y--;
             return true;
         }
         else if (r == 3 && y < y_size-1) {
             // Move Down
-            board[x+x_size*y] = D;
+            board[x+x_size*y] = Down;
             y++;
             return true;
         }
@@ -76,16 +76,16 @@ class MazeGenerator {
             for (int j =  0; j < x_size; j++) {
                 switch (board[j+x_size*i])
                 {
-                case R:
+                case Right:
                     std::cout << arrows_out[1];
                     break;
-                case L:
+                case Left:
                     std::cout << arrows_out[2];
                     break;
-                case D:
+                case Down:
                     std::cout << arrows_out[3];
                     break;
-                case U:
+                case Up:
                     std::cout << arrows_out[4];
                     break;
                 default:
@@ -104,10 +104,10 @@ class MazeGenerator {
                 short c = board[j+x_size*i]; // up,dwn,l,r
 
                 // Incomming
-                if (i < y_size-1 && board[j+x_size*(i+1)] == U ) {c |= 4;}                    
-                if (i > 0        && board[j+x_size*(i-1)] == D ) {c |= 8;}
-                if (j < x_size-1 && board[j+1+x_size*i]   == L ) {c |= 1;}
-                if (j > 0        && board[j-1+x_size*i]   == R ) {c |= 2;}
+                if (i < y_size-1 && board[j+x_size*(i+1)] == Up ) {c |= Down;}                    
+                if (i > 0        && board[j+x_size*(i-1)] == Down ) {c |= Up;}
+                if (j < x_size-1 && board[j+1+x_size*i]   == Left ) {c |= Right;}
+                if (j > 0        && board[j-1+x_size*i]   == Right ) {c |= Left;}
 
                 std::cout << pipes_out[c];
             }
