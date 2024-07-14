@@ -5,24 +5,17 @@
 #define MAZE_GEN
 
 class MazeGenerator {
+    protected:
     const int size_x, size_y;
-    int x,y;
-    Maze maze;
 
     public:
-    MazeGenerator(int x, int y);
+    MazeGenerator(int x, int y) : size_x(x), size_y(y) {};
 
-    ~MazeGenerator();
+    virtual ~MazeGenerator() {};
 
-    void initializeMaze();
+    virtual void generate_maze() = 0;
 
-    void mazeGeneration(int steps);
-
-    bool makeGenerationStep();
-
-    Maze& get_maze();
-
-    CompressedMaze get_compressed_maze();
+    virtual Maze& get_maze() = 0;
 };
 
 #endif

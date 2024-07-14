@@ -1,18 +1,25 @@
 #include <ctime>
-#include <cmath>
 #include <iostream>
-#include "../headers/MazeGenerator.h"
+#include "../headers/MG_OriginShift.h"
+#include <string.h>
+
 
 
 int main(int argc, char *argv[]){
     std::srand(std::time(nullptr));
-    const int x = 64, y = 32, steps = 4*x*y*pow(log(sqrt(x*y)),2)/M_PI;
+    const int x = 64, y = 32;
 
-    MazeGenerator gen(x,y);
-    gen.mazeGeneration(steps);
+    MG_OriginShift gen(x,y);
+
+    std::cout << "Init Maze:" << std::endl;
+    gen.get_maze().visualizeMaze();
+    std::cout << std::endl;
+
+    gen.generate_maze();
     std::cout << "Maze:" << std::endl;
     gen.get_maze().visualizeMaze();
+    std::cout << std::endl;
 
-    std::cout << "\nCompressed Maze:" << std::endl;
-    gen.get_compressed_maze().visualizeMaze();
+    std::cout << "\nNormalized Maze:" << std::endl;
+    gen.get_normalized_maze().visualizeMaze();
 }

@@ -41,7 +41,7 @@ class Maze {
 
     void normalize();
 
-    void visualizeMaze();
+    virtual void visualizeMaze();
 };
 
 #endif
